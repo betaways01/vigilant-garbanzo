@@ -1,0 +1,582 @@
+I need help for a paper in Uni for which I have to replicate results from a paper using STATA with a given, slightly modified data set to get to the same results (tables, graphs). It is one graph and the tables (regression tables Difference-in-Difference approach). I would just need a do file with the replication of results, with a short explanation of what was done in which step in the do file in a few words that's pretty much it. The approach is clearly stated in the paper. Here is the paper and the datasets. I would need Figure 2, Table 3 and Table 5 replicated.
+
+
+abstract
+We exploit a voting reform in France to estimate the causal effect of exit poll information
+on turnout and bandwagon voting. Before the change in legislation, individuals in some
+French overseas territories voted after the election result had already been made public
+via exit poll information from mainland France. We estimate that knowing the exit poll
+information decreases voter turnout by about 11 percentage points. Our study is the first
+clean empirical design outside of the laboratory to demonstrate the effect of such
+knowledge on voter turnout. Furthermore, we find that exit poll information significantly
+increases bandwagon voting; that is, voters who choose to turn out are more likely to vote
+for the expected winner
+
+
+1. Introduction
+“A Californian plans to vote after work in what she believes to be a close presidential election. (She has little interest in
+the race for congressman for her district, although it is closer.) The day is rainy and as she approaches the polling place
+she sees a long line. On the radio she hears that one presidential candidate has a substantial lead in other states. She
+says why bother and turns her car around and drives home.” Sudman (1986, p. 332)
+In August 2009, exit poll results for key regional elections in Germany were leaked on Twitter before voting ended. These
+polls showed that Chancellor Angela Merkel's conservative party had much less support than in previous elections.
+Wolfgang Bosbach, deputy parliamentary head of Merkel's Christian Union bloc, said that the leaked results “damaged
+democracy” and a spokesman for the pro-business Free Democrats, Merkel's preferred coalition partner, commented that
+the leaks were “unacceptable.” In addition, such reporting is against the German law with a fine of up to 50,000 euros, so
+German election officials immediately began to investigate whether the Twitter messages violated the law.1 The Germancase is not unusual: a survey of 66 countries worldwide finds that of the 59 that permit exit polls during an election, 41
+prohibit publication of the results until after all voting has concluded (see Spangenberg, 2003).
+Yet in recent 21st century elections, incidents similar to the 2009 Twitter controversy in Germany abound. In 2007, the
+websites of several Swiss and Belgian newspapers crashed when French citizens attempted to access exit poll results during
+an election, and in the 2012 French presidential election, results were also available online while voting was still in
+progress.2 Countries with multiple time zones such as France, the United States, Canada or Russia, face particular difficulties,
+as voting takes place at different times in different regions.3 The notorious reporting on Floridian exit poll results in the
+2000 United States presidential election occurred while voters in the western part of the state and the rest of the nation
+were still voting. In 2004 leaked US presidential exit poll results were commonly discussed among voters while east coast
+voters were still going to the ballot booths.4 With the proliferation of Twitter, Facebook, and other social media worldwide,
+the ability of governments to control and limit leaked exit polls both inside and outside their countries is becoming
+increasingly difficult.
+Beyond the increasing ability of later voters to find out results of early voting on election day, many nations are also
+experimenting with “convenience voting,” in which voters can easily cast their ballots days or even weeks in advance of the
+official election day. As Gronke et al. (2007) report, almost half of the democratic nations in the EPIC Project database allow
+individuals to vote prior to the designated election day, with over a third allowing all voters this privilege. Convenience
+voting is particularly popular in the United States where voting by mail or at the mall is commonplace; 25% of U.S. voters in
+the 2006 elections used convenience voting methods (see Gronke et al., 2007).
+In this paper, we make use of a unique natural experiment to consider whether the behavior of later voters is affected by
+exit poll information about earlier voter choices. Specifically, we exploit a 2005 voting reform in France to estimate the
+causal effect of exit poll information on turnout and bandwagon (or underdog) voting.5 Before the change in legislation,
+individuals in French western overseas territories voted after the mainland election results were already known via exit
+polls. Since 2005, the western overseas territories vote on the day before the mainland and hence those voters do not have
+any knowledge of the choices on the mainland or the eastern territories. This reform allows us to use a difference-indifference strategy. It creates an exogenous variation in information for a well identified group of voters and provides
+therefore the setting for a natural experiment to study the effect of exit poll information on voters' behavior. Such an
+approach has two advantages. First, relative to existing studies on the West Coast effect, our natural experimental setting
+allows us to eliminate many of the possible caveats in the analysis of the causal effect of information by providing a
+counterfactual situation (same constituencies with and without exit poll information). Second, our study does not suffer
+from the possible concern about the ecological validity of the results, a criticism often raised about laboratory experiments.
+Using this voting reform to study the effect of exit poll information, we find evidence that the public knowledge about
+such polls not only decreases turnout by about 11 percentage points, but also increases bandwagon voting. We therefore
+conclude that exit polls can indeed have consequential effects on voter behavior and that the advent of social media
+reporting on exit poll information may fundamentally change the democratic process in many countries where such
+information was previously unavailable.
+Despite the growing tendency for voters to learn exit poll results while an election is ongoing, previous observational
+data-based research on the effects of such information on voting behavior is limited and inconclusive. One possible natural
+setting for exploring this issue is the so-called West Coast effect in the U.S.; that is, the release of early East Coast election
+returns before the polls close on the West Coast due to the fact that the presidential election takes place in three different
+continental time zones. The debate over this effect emerged in the early 1960s after the introduction of sophisticated
+computer models, improved survey techniques for predicting election results, and rapid access to media information. The
+first set of related studies, however, which explored the 1964 presidential election, showed barely any West Coast effect (see
+for example McAllister and Studlar, 1991).
+A second set of major studies focused on the 1980 election,6 in which pre-election polls indicated a close election
+between Reagan and Carter, but Carter conceded defeat even before the polls closed in the west.7 However, although these
+researchers used a richer set of data (aggregated data on various elections, regional, data or congressional districts, or bettersurvey data), they produced mixed results. For example, Jackson (1983) finds some evidence that media coverage of exit
+polls in the 1980 U.S. presidential election did lead to a reduction in turnout. However, the survey data used in his and a
+number of similar studies of the 2000 election have been strongly criticized as unreliable (see the review in Mason et al.,
+2001.
+8
+In an interesting recent study, Meredith and Malhotra (2011) examine the effects of convenience voting on vote shares in
+the 2008 California presidential primary. They exploit the fact that some small precincts are forced by the state to use voteby-mail procedures for all ballots while in other precincts voters can choose when to participate. They find significant
+differences in vote shares of the candidates, suggesting information effects on voter choices in precincts where vote-by-mail
+was optional. In particular, they find that in precincts where all voters were forced to vote-by-mail the vote shares for
+candidates who had withdrawn from the election before election day were significantly higher than in precincts where
+convenience voting was optional. Moreover, the vote share for Obama (the front-runner at the time of the California
+election) was lower in the vote-by-mail precincts as well, suggestive of bandwagon voting.
+A few laboratory studies suggest that information about early voting can have significant effects on voter behavior. These
+studies indicate that later voters' choices appear to be influenced by information about early voting. More specifically, later
+voters who learn the choices of earlier voters make different turnout decisions (see Battaglini et al., 2007) or vote for
+different candidates (see Hung and Plott, 2001; Morton and Williams, 1999, 2001) than those made by voters with the same
+induced preferences but without that information.
+Our results show that as the experimental evidence suggests, later voters are indeed influenced by early voting results.
+Therefore, the advent of increasing social media reports of election results through exit polls can lead to fundamental
+changes in the way voters behave. Such reporting may thus have important consequences for how democracy works in
+many countries. Most obviously, candidates and political parties may have incentives to manipulate the reported results in
+order to seek advantages. But even if the results are accurately reported, other serious effects might occur. For example, if
+later voters are less likely to participate or have a tendency to engage in bandwagon voting, then the candidates preferred by
+earlier voters may be more likely to win elections. To the extent that the timing of the voter participation decision is
+exogenous and depends on voter characteristics such as income, ethnicity or other factors that arguably affect voter
+preferences, then voters may be unequally represented even though their votes are theoretically equal. At the same time, to
+the extent that the timing of voting is endogenous, candidates and political parties will have an incentive to engage in
+strategic manipulation of the factors that influence whether individuals choose to participate, much like the strategic
+manipulation in the timing of presidential primaries in the United States.9 Hence, given that the election process is
+fundamentally changing with social media reporting of exit poll results, the issue of whether later voters' choices are
+influenced is an important empirical question for many countries in which such information has historically not been
+available.10
+In the next section, we review the relevant theoretical literature on information and voting behavior. Section 3 then
+outlines our empirical research design and the natural experiment, Section 4 presents our results regarding the effect on
+turnout, Section 5 addresses robustness concerns and Section 6 presents the results on the Bandwagon effect. We conclude
+and discuss the implications of our analysis in Section 7.
+2. The role of exit poll information in voting choices: theory and experimental evidence
+When individuals know the results from earlier voting via leaked exit polls, voting becomes sequential in nature. In the
+case of complete information about the choices before them but incomplete information about other participants’
+preferences learning, the results of earlier decisions simply provide later participants with information about the likelihood
+that their vote may be pivotal. It is thus straightforward to show that if voting is costly (even if the costs are minimal),
+learning that one's own decision will not affect the outcome implies that a rational individual should abstain. If however, a
+voter learns instead that the election is extremely close and there is a high probability of their vote being pivotal, then later
+voters may actually participate at greater rates than they would if voting were simultaneous and they had less precise
+information about other voters' choices.
+If voters have private information about the choices before them in an election, then early voting results not only reveal
+the extent to which individual choices may be pivotal but may also provide later voters with insights into the information
+held by early voters about the choices. As shown by Battaglini (2005), when voting is costly the set of equilibria in sequential
+private information voting games are disjoint from those in which voting is simultaneous. That is, later voters' choices will
+be influenced by the results of early voting. Battaglini et al. (2007) also find support for these qualitative theoretical
+predictions in laboratory elections using a three-voter game; in particular, they find significant evidence of strategic
+abstention by later voters. Other results, however, are at variance with theory – they find that early voters tend to participate
+more than theoretically predicted, whereas later voters abstain more, sometimes even when their votes could be pivotal.
+They conclude that, as predicted, although sequential voting tends to be more informationally and economically efficient than simultaneous voting, later voters benefit at the expense of early voters, so there is a cost in terms of equity.
+Nevertheless, they find no evidence of later voters ignoring their private information and engaging in bandwagon or
+underdog voting.
+Callander (2007) considers the comparison of simultaneous and sequential voting under asymmetric information when
+voters receive utility from conforming to the majority (voting for the winner) independent of the utility they derive from
+whether the winner is their own best choice. Specifically, he derives an equilibrium under sequential voting in which voters
+engage in bandwagon voting (voting for the leading candidate) even though their private information may suggest that the
+leading candidate is not their own best choice. He finds that such bandwagon voting may occur even when later voters'
+choices are not pivotal and the outcome is already decided (because of the additional utility voters receive from the act of
+voting for the winning candidate). This argument is supported by earlier work by Hung and Plott (2001), which provides
+experimental evidence of conformity voting when subjects are rewarded for doing so. Presumably, if voters similarly receive
+utility from voting for an underdog candidate (or are rewarded for doing so in an experiment), then later voters may also
+engage in underdog voting even when they previously believed the leading candidate to be their own best choice.
+Hence, both theory and the experimental evidence suggest that if the act of voting is costly, when later voters learn from
+exit poll information that their decision is unlikely to be pivotal, they are more likely to abstain. If, however, they receive
+utility from the act of voting for either the winner or the underdog (independent of whether the winner is their own best
+choice), then such exit poll information may lead them to engage in either bandwagon or underdog voting, respectively.
+Our natural experiment allows us to evaluate the extent to which exit poll information affects the turnout of later voters
+and whether later voters are more likely to engage in either bandwagon or underdog voting.
+3. The natural experiment: institutional background and empirical strategy
+3.1. The French electoral system
+France has a semi-presidential system11 through which French president is directly elected by the citizens via a tworound runoff system. In the first round a large number of candidates can participate.12 If one candidate receives more than
+50% of the votes in the first round he or she is declared the winner. Such an immediate victory, however, has only happened
+once since the beginning of the Fifth Republic, in 1958.13 Usually, the two candidates that receive the most votes participate
+in a second round to determine the winner.
+This two-round runoff system model is also used in most other elections in France with some variation. The French
+parliamentary elections differ slightly in the sense that the two-round runoff elections within each constituency allow more
+than two candidates to participate in the second round.14 In practice, however, although a few second rounds are disputed
+by three candidates, most involve only two.
+Balloting traditionally takes place on a Sunday. French electoral law prohibits exit poll publication until the close of
+voting in mainland France (Bale, 2002) and bans publication, broadcasting and commenting on opinion polls for the day
+before and the day of the election (Saturday and Sunday). The electoral law also stipulates that the official campaign has to
+stop for these last 2 days.15
+When a French presidential election is held, it is always the only contest on the ballot, which stands in contrast to, for
+example, U.S. elections, in which ballots include local, congressional and senatorial posts, and even local propositions and
+initiatives. The French case thus allows us to measure turnout for presidential elections only, meaning that the turnout
+measured is not confounded by effects from other elections.
+During the day of the election, the release of exit polls is therefore not allowed until after the closure of the last polling
+booth in mainland France, on Sunday at 8:00PM CET.16 At exactly 8:00PM, TV channels release highly precise early
+estimations of the final results. These are based on large exit polls and on the first results from the majority of polling
+booths, which close at 6:00PM.17.
+
+Table 1
+Forecasts as presented by France's main public TV channel France 2 at 8:00PM. All numbers are in percentage points. “Pivotal candidates” refers to the first
+and second candidate in the second round and the second and the third candidate in the first round.
+Year Round First candidate Second candidate Third candidate Diff pivotal candidates
+Forecast Result Diff Forecast Result Diff Forecast Result Diff Forecast Result Diff
+1981 1 28.3 28.32 "0.02 25.2 25.85 "0.65 17.9 18 "0.1 7.3 7.85 0.55
+2 51.7 51.76 "0.06 48.3 48.24 0.06 – –– 3.4 3.52 0.12
+1988 1 34.4 34.1 0.30 19.5 19.94 "0.44 16.5 16.55 "0.05 3 3.39 0.39
+2 53.9 54.02 "0.12 46.1 45.98 0.12 – –– 7.8 8.04 0.24
+1995 1 23.4 23.3 0.1 20 20.84 "0.84 18.5 18.58 "0.08 1.5 2.26 0.76
+2 52 52.64 "0.64 48 47.36 0.64 – –– 4 5.28 1.28
+2002 1 20 19.88 0.121 17 16.86 0.14 16 16.18 "0.18 1 0.68 "0.32
+2 82.1 82.21 "0.11 17.9 17.79 0.11 – –– 64.2 64.42 0.22
+2007 1 29.6 31.18 "1.58 25.1 25.87 "0.77 18.7 18.57 0.13 6.4 7.3 0.90
+2 53 53.06 "0.06 47 46.94 0.06 – –– 6 6.12 0.12
+2012 1 28.4 28.63 "0.23 25.5 27.18 "1.68 20 17.9 2.1 5.5 9.28 3.78
+2 51.9 51.64 0.26 48.1 48.36 "0.26 – –– 3.80 3.28 "0.52
+
+To demonstrate the quality of these early estimates, we collected the 8:00PM CET forecasts for each candidate from the
+main public channel (France 2) at every election in our sample. Table 1 lists these forecasts, together with the actual results
+and the differences between the two. In the second round of the 1981 election, for example, the difference between the final
+result and the 8:00PM predictions is the same for both the first candidate and the runner-up at 0.06 percentage points, with
+the forecasted difference between the two candidates at 3:4% and the actual difference at 3:52%. As Table 1 clearly shows,
+exit poll forecasts are extremely accurate, the final ranking is always the one predicted by the forecast and the proportion of
+votes is often similar down to a few decimal points
+
+fully fledged citizens of the French Republic and therefore participate in the French presidential election in the same way as
+French citizens on the mainland.19
+Before 2005, French elections were held on Sundays, meaning that they began in the most eastern parts, New Caledonia,
+Wallis and Futuna, and then moved progressively across the more westerly territories as the opening time for polling booths
+arrived (typically between 8:00AM and 9:00AM). As a result, the territories located to the west of the French mainland
+(e.g. the Caribbean, Guiana) and in the Pacific (French Polynesia) voted partially or completely after mainland France.
+Because the mainland accounts for approximately 96% of the total French population,20 in national ballots like
+presidential elections, the result on the mainland almost certainly determines the overall election result. This setting is
+therefore different from that of the U.S., where the number of electoral votes determined by California can empirically
+decide the outcome of a close contest.
+Table 1 shows that in most cases the result is fully determined once the mainland results are known. Voters in overseas
+territories west of mainland France only represent around 1:5% of the French electorate. The predicted difference between
+the two “pivotal candidates” (the first versus the runner-up in the second round and the second versus the third candidate
+in the first round) given by exit polls is almost always above 1:5%.
+To illustrate this point further, Table 2 shows the number of votes by which the runner-up was ahead of the third
+candidate in mainland France in the first round and the vote edge of the first versus the second candidate in the second
+round, respectively. It also gives the number of registered voters in the western OSTs and the corresponding difference
+between both measures for each election in our sample. It is clear that there are only two elections in which it would have
+been mathematically possible for the western OST to make a difference: the first rounds of 1995 and 2002. In 1995, the
+difference is so large that changing the result would have required at least 95% of the registered voters in the west to vote for
+the third candidate and the remaining 5% not to vote for the second candidate. Such a scenario seems extremely unlikely.
+Moreover, in this election, both candidates were moderate conservatives, giving limited incentives for voters to change the
+outcome. The case is somewhat different, however, for the first round of 2002. Here if the difference between the second
+and third candidates in OST voting was approximately 33% of registered voters, then the outcome of the election would be
+affected by choices made in the OST. Although such a figure still seems quite unlikely, it is at least not completely impossible
+with evident consequences for voter turnout. In Section 5, therefore, we conduct robustness checks to show that our
+estimates remain unchanged by this event.
+As a result of this geographical distribution, before 2005 voters in the territories to the west of mainland France had
+access to information about the presidential election results while voting booths were still open, while French Polynesia and
+the territories off the American continent had precise information on election results by 9:00AM and 2:00PM, respectively.
+Hence, most voters probably knew who would win the election before voting. In fact, in 2002, the defeated presidential
+candidate Lionel Jospin resigned from his office before people in the western OST had even voted.
+In 2002 the Constitutional Council suggested changing the voting order for western OST citizens' so that the balloting
+would take place before the results in mainland France were made known. The Constitutional Council is the highest
+constitutional authority in France and its role is to ensure that the principles of the constitution are respected by the laws. In
+March 2003, the government enacted a constitutional law (2003-276) that changed the French Constitution by removing the
+word “Sunday” in the article 7 of the Constitution relative to elections. This change allowed the western territories to switch
+their election day to Saturday. Answering to a question in the Senate about the day of elections in western overseas
+territories, the Overseas Ministry indicated that this change in constitutional law intended to remedy the fact that OST
+voters had access to the mainland results and that this situation was likely to “lead to higher level of abstention and possibly
+influence the sincerity of the voting choices”.
+21 Following this law in 2003, it was decided to change the voting day to
+Saturday in all territories to the west of the mainland: French Polynesia, St. Pierre and Miquelon, Guadeloupe, French Guiana
+and Martinique. This reform became effective in 2005.
+3.3. Other reforms and relevant events
+Any analysis of the effect of a policy change over a given period needs to ensure that the observed changes in the variable
+of interest cannot be explained by other policy changes or events happening during the same period. In our case, four
+potentially relevant events happened over the period studied that warrant discussion. First, in 2002, the duration of the
+presidential mandate was reduced from seven to five years, which may have affected the overall turnout at the national
+level. There seems to be no reason, however, why it should affect turnout differently in the OST relative to the mainland, and
+it is a priori even less likely that it would affect turnout differently in the OST to the west and east of mainland France.
+
+Second, 2002 saw the first candidate from an OST (Guiana) participating in the first round of the presidential election,
+which could have led to a higher turnout in Guiana in this specific election. We control for this concern by including a
+dummy variable indicating Guiana in the first round of 2002 in the estimations (see Section 5.1).
+Third, 2002 was also the first year in which a candidate from the far-right reached the second round, an unexpected
+event that created a political shock in the country. As the majority of the population in the overseas territories is not
+ethnically white, they are likely to be averse to this party's political objectives. We address this concern more closely in
+Section 5.2; we find no empirical evidence that this event affects our conclusions.
+Finally, the last decade has seen the growth of the Internet, making access to information easier. Hence, in practice, early
+estimations of the election results are produced by polling companies as early as 5:00PM CET on the day of the election. In
+the 1980s, the laws preventing publication of early polls were easy to uphold because the only media able to report such
+early results would be punished severely for doing so. More recently, however, Belgian and Swiss newspapers have begun
+posting early estimations on their websites during election day but as they are based outside of France, even though French
+speaking, they are not bound to respect French electoral law. Unlike the early 2000s when access to the Internet was limited,
+by the 2007 and 2012 elections, the spread of online election result information after 5:00PM had grown substantially,
+leading to a debate about the usefulness of a law which could be barely enforced. We allow for different time trends in our
+estimations to control for such changes over time.
+3.4. Data
+Our primary data set comprises French presidential election results, especially turnout for first and second election
+rounds from 1981 onwards (1981, 1988, 1995, 2002, 2007, and 2012).22 Although we organize the data at the departmental
+level to make group sizes as comparable as possible, the population sizes still vary from around 4000 in St. Pierre and
+Miquelon to about 1.8 million in the Nord department. We treat each OST as a department in the analysis.23 There are four
+OSTs in the east and five in the west, which in addition to the 96 departments on the mainland comprise a total of 105 such
+departments in France. The departments we refer to as “treated” are French Polynesia, Saint Pierre and Miquelon,
+Guadeloupe, French Guiana, and Martinique.24
+In order to conduct robustness checks, we use similar data from French parliamentary elections, taken directly from the
+French Ministry of Internal Affairs, which are also arranged at the departmental level and span a period from 1997 to 2012.
+In parliamentary elections – unlike presidential elections – voters elect representatives in their local constituencies,
+independent from the results of mainland voting. Although the overall outcome of the parliamentary elections is in most
+cases decided on mainland France, the uncertainty about the identity of the local MP has not yet been resolved when voters
+in the OST vote. Hence, if the 2005 reform has a causal effect on voting behavior in the OST to the west of mainland France,
+this effect should be primarily evident in presidential elections and less so in parliamentary elections. In fact we do not find
+any significant effect on turnout in parliamentary elections, which increases confidence that we actually identify the causal
+parameter of interest (see Section 5).
+
+Table 2
+Vote differences between the two pivotal candidates (2nd versus 3rd in first round, 1st versus 2nd in second round) on the mainland and in the east
+compared to the number of registered voters in the western OST. Numbers are in 1000 votes.
+Year Round Vote edge on mainland Registered voters in western OST Difference
+1981 1 2293 470 1822
+2 1247 470 776
+1988 1 995 556 439
+2 2405 556 1849
+1995 1 644 675 "30
+2 1486 675 810
+2002 1 254 756 "502
+2 19,605 754 18,851
+2007 1 2520 826 1694
+2 2200 826 1374
+2012 1 3232 869 2363
+2 1027 870 157
+
+3.5. Empirical strategy
+To assess the impact of knowing the election outcome on voter turnout, we estimate equations of the following form:
+Yst ¼ αþηtþδ1½t Z2005% þλ1½sATG% þβ1½t Z2005%1½sATG% þXstγþεst; ð1Þ
+where TG indicates the treated OST (i.e. the OST to the west of mainland France) and Yst the turnout by department s in year
+t. 1½(% represents the indicator function and X a vector of controls that contains time trends, second round election dummy
+and OST dummies, εst is the usual error term. β, the coefficient on the interaction of the treatment group and the time
+dummy, is the difference-in-difference estimator (DID) of the causal effect of interest.
+The advantage of this empirical design is that all department-specific fixed-effects that might influence turnout are
+canceled out; for example, different political attitudes in the different territories, differences in political knowledge and
+costs of voting (distance to the next voting booth, climatic conditions etc.). We first present results from the most basic DID
+where we only use the pre– and post–treatment election and only the eastern OST as a control group.25 In doing so we are
+able to more explicitly control for OST specific characteristics, such as specific political attitudes towards the political
+candidates and towards the mainland in general. In this most basic specification the treatment effect is estimated as a
+difference-in-difference of four sample averages. Hence no parametric functional form assumptions and extrapolations are
+needed. Nevertheless, later on we use all elections from 1981 to 2012 and also include the departments from the mainland
+as an additional control group. In this case we control for different time trends of turnout. In the most detailed model we
+allow every department to be on a different linear and quadratic time path, which is sometimes labeled as a “random trend
+model” (Wooldridge, 2007, p. 315), but is essentially a difference-in-difference-in-difference model where previous periods
+are used as pre-program tests. Empirically, this approach implies that we replace ηt in Eq. (1) by ηst and ηst
+2. Allowing the
+different departments to be on different time trends over the whole sample period is an effective tool for examining
+whether the treatment effect we estimate in fact only captures different trajectories of turnout for these different
+departments. As it turns out the results remain robust relative to the simple nonparametric DID-model.26
+Although splitting up the French mainland into departments helps to mitigate concerns about the differing sizes of the
+underlying voting populations for each observation, these differences might still be a concern in our analysis. To tackle
+this concern, we apply weighted least squares to Eq. (1) using the number of registered voters in each department as
+weights. To assess the reliability of our standard error estimates, we compare OLS, clustered and bootstrapped standard
+error estimates.
+4. Results
+Fig. 2 illustrates the evolution of presidential election turnout averaged by year for all three territories – the mainland
+and the western and eastern OST.27 Here, turnout trends seem to be reasonably parallel before the legislative change, and
+the increase in turnout is visibly larger in the treated OST between the 2002 and 2007 elections. In 2007, however, there is a
+distinct increase in turnout in all parts of France, after which, the time trends again seem to follow a parallel path. Fig. 3,
+which plots the same data for each western OST individually, supports these conclusions. This graph also shows that the
+results are not driven by some outliers, but confirms the consistent pattern for all western OSTs.
+Table 3 displays the results from the most basic nonparametric difference-in-difference model where we compare only
+the two rounds of the last election before the law change with the two rounds of the first election after (2002 and 2007). We
+also exclude the departments from the mainland and use only the eastern OST as a control group. Naturally, this approach
+dramatically decreases the number of observations (N¼36).28 We find a positive and significant point estimate of about 11
+percentage points. This finding implies that knowing precise exit poll information decreases turnout by about 11 percentage
+points.29 Weighting by the size of the population (columns (3)–(4)), as well as controlling for the round of the election does
+not affect the estimated treatment effect. It seems likely that there is some within-department correlation of the error term and hence it is appropriate to allow for clustered errors. We do so whenever possible. However, when dropping the
+departments from the mainland we have nine clusters which is not enough to estimate clustered standard errors. In this
+case we block-bootstrap errors which has been shown to work well with a small number of clusters.
+Table 4 presents the results using all six elections and all 105 departments, which makes a total of 1260 observations. We
+include OST and round dummies and control for different common time trends of turnout (columns (1)–(5)) and territory-specific
+
+Fig. 2. Average turnout by geographical area and year. The vertical line indicates the year in which the law change occurred.
+Fig. 3. Average turnout in each treated OST versus the turnout in the mainland plus the eastern OSTs. The vertical line indicates the year in which the law
+change occurred.
+Table 3
+Difference-in-difference estimates with turnout as dependent variable. Sample includes both rounds of the 2002 and 2007 elections and the eastern OST
+constitute the control group, N¼36. The point estimates and significance levels are very similar when we additionally exclude the first round of 2002
+because of the ‘Le Pen’ effect.
+Eastern OST as control group
+Baseline Weighted regression
+(1) (2) (3) (4)
+Treatment effect 0.11nnn 0.11nnn 0.11n 0.11nn
+ð0:04Þ ð0:04Þ ð0:06Þ ð0:05Þ
+Round dummy No Yes No Yes
+SEs Block bootstrap Block bootstrap OLS OLS
+n Significance at the 10% level.
+nn Significance at the 5% level. nnn Significance at the 1% level.
+
+
+Table 4
+Difference-in-difference estimates with turnout as the dependent variable. Standard errors are clustered on the department level and given in brackets
+below. N¼1260. Specifications (6)–(7) correspond to the random trend model, in which the territory indicator is coded as 0¼mainland, 1¼eastern OST,
+2¼western OST.
+Potential common time trend Territory specific time trend
+(1) (2) (3) (4) (5) (6) (7)
+Treatment effect 0.06nnn 0.06nnn 0.06nn 0.06nn 0.06nn 0.11nnn 0.14nnn
+ð0:02Þ ð0:02Þ ð0:02Þ ð0:02Þ ð0:02Þ ð0:02Þ ð0:02Þ
+OST dummy No No No Yes Yes No No
+Common linear time trend No Yes No No Yes No No
+Common quadratic time trend No Yes No No Yes No No
+Round dummy No Yes No Yes Yes Yes Yes
+Weighting No No No No No No Yes
+Territory indicator No No No No No Yes Yes
+Territory-specific time trend No No No No No Yes Yes
+SEs OLS OLS Clustered Clustered Clustered Clustered Clustered
+n Significance at the 10% level,
+nn Significance at the 5% level, nnn Significance at the 1% level.
+
+
+time trends (columns (6)–(7)).30 In the basic specification the point estimates are around 6 percentage points and then increase to
+11 and 14 respectively when we allow for territory specific time trends (column (6)) and weighting (column (7)). Controlling for the
+election round and whether a department is an OST does not affect the estimate. Columns (1) and (2) show that OLS errors are in a
+similar range to clustered errors.
+In Table 5 we take the analysis one step further and estimate a different linear (columns (1)–(4)) and quadratic time
+(columns (2) and (4)) trend for all of the 105 departments. The coefficient of interest remains remarkably stable at around 11
+percentage points in the baseline specification and again increases somewhat when we introduce weighting (columns (3)
+and (4)), but is now much more precisely estimated with standard errors around two percentage points.
+In summary, in all specifications, the point estimate remains stable and quite precisely estimated. We report an increase
+in turnout from not knowing the election result of 11 percentage points. Moreover, concerns about different population sizes
+underlying each observation do not seem to matter.31
+5. Robustness checks
+5.1. Placebo-estimates and the candidate from French Guiana
+In order to check for robustness, we first calculate placebo estimates using 1994 as the year in which reform was
+implemented (excluding post–2005 observations)32 and secondly (falsely) using the eastern OST as a treatment group (on
+the full sample). We do not find any significant coefficient estimate in either case (the results are not reported here).
+The first-time appearance in the first round of the 2002 election of a candidate from French Guiana might have led to an
+overly increased turnout in this department. As a consequence, our estimates might be biased since Guiana is one of the
+treated territories. As the 2002 election is before the 2005 reform, this bias would create a downward bias on the estimated
+effect of the reform on the change in turnout. Given that we observe an increase in turnout following the reform, the
+existence of a Guiana candidate in 2002 can only make our estimate conservative (meaning that the effect of exit poll
+information can only be higher than the one estimated and not lower). In any case, we control for a possible bias due to this
+event by including a dummy indicating Guiana in the first round of 2002. As expected, we find a positive and significant
+coefficient on this dummy. Nevertheless, all results from the tables presented previously remain unchanged (and are thus
+not reported here), indicating that this event has no impact on our estimates.
+
+Table 5
+Difference-in-difference estimates with turnout as dependent variable. Separate time trends for each of the 105 departments are included. Sample includes
+all presidential elections between 1981 and 2012, N¼1260. The point estimates and significance levels are very similar when we additionally exclude the
+first round of 2002 because of the ‘Le Pen’ effect.
+Department specific time trends
+Baseline Weighted regression
+(1) (2) (3) (4)
+Treatment effect 0.11nnn 0.09nnn 0.14nnn 0.18nnn
+ð0:02Þ ð0:02Þ ð0:02Þ ð0:01Þ
+OST dummy Yes Yes Yes Yes
+Round dummy Yes Yes Yes Yes
+Department-specific linear time trend Yes Yes Yes Yes
+Department-specific quadratic time trend No Yes No Yes
+SEs Clustered Clustered Clustered Clustered
+n Significance at the 10% level,
+nn Significance at the 5% level, nnn Significance at the 1% level.
+
+
+5.2. “Le Pen elections”
+In Section 3.3, we expressed concern that the anomalous result in the first round of 2002 – in which right-wing
+candidate Jean-Marie Le Pen surprisingly made it into the second round – might have impacted our results. First, we argue
+that this event is likely to bias our estimates downward, meaning that we are presumably estimating lower bounds of the
+actual effect. This is because the closeness of the election is likely to increase turnout more in the west, which on average
+has better information when voting, than in the eastern parts of France. As a result, the DID estimates tend to be smaller
+than in the counterfactual case without this highly polarizing candidate. Second, we replicated the regressions from
+Tables 3–5 excluding the first round of 2002. Reassuringly, in all cases the estimates are still statistically significant and, if
+anything, the point estimates increase slightly.
+Table 6 replicates Table 3 without the Le Pen election. The results clearly withstand the exclusion of this election, the
+coefficients are however less precisely estimated which is most likely a consequence of the small sample size. Nevertheless,
+the conclusions also seem to be robust using larger samples and including the mainland as a control group. Further results
+can be found in Table 12 in the appendix. Taken together, these findings strongly suggest that the results reported earlier are
+not biased by unusual events such as the ‘Le Pen election’.
+5.3. Testing for other shocks on turnout
+A threat to the validity of our difference-in-difference estimates would be a different time path for turnout in the treated
+OST versus the control group in the absence of treatment. While it is reassuring to find that allowing for different linear and
+quadratic turnout trajectories in every department does not impact the results, it is possible to go one step further. We use
+turnout data on parliamentary elections in France to re-estimate the same difference-in-difference models as in Section 3.5.
+Although these elections are national we would expect a smaller or even no treatment effect because in each department
+voter chooses between different candidates who are seeking the position as their local representative. Therefore, the result
+on the mainland does not influence who will represent an OST district in the national parliament.33 In that sense estimating
+difference-in-difference models with data from parliamentary elections can provide an indication as to whether other
+unobserved shocks that could potentially confound our estimates of affected turnout in that period, because such shocks, if
+they exist, are likely to affect other elections as well.
+Table 7 replicates Table 3 using the parliamentary data; that is, here only the eastern OST serve as a control group and the
+sample is restricted to the election right before and right after the law change. Given that no estimated coefficients are
+significantly different from zero at the 10% level and all are also much lower in absolute terms, OST-specific shocks do not
+seem to be a concern. This finding assures us that we are indeed identifying the causal effect of interest and not other timevariant shocks. We again also introduce weighting but find no significant point estimates. We present additional results in
+the appendix. Fig. 4 summarizes the turnout trends at these parliamentary elections by territory
+
+Table 6
+Excluding Round 1 of 2002. Difference-in-difference estimates with turnout as dependent variable. Sample includes both rounds of the 2002 and 2007
+elections and the eastern OST constitute the control group, N¼27.
+Eastern OST as control group
+Baseline Weighted regression
+(1) (2) (3) (4)
+Treatment effect 0.09n 0.09n 0.14n 0.14n
+ð0:05Þ ð0:05Þ ð0:07Þ ð0:07Þ
+Round dummy No Yes No Yes
+SEs Block Bootstrap Block Bootstrap OLS OLS
+n Significance at the 10% level,
+nn Significance at the 5% level, nnn Significance at the 1% level.
+Table 7
+Placebo difference-in-difference estimates analogous to earlier tables with parliamentary election turnout as the dependent variable. Standard errors are
+given in brackets below. The sample includes parliamentary elections of 2002 and 2007 only and uses only the eastern OST as control group. N¼35.
+Eastern OST as control group
+Baseline Weighted regression
+(1) (2) (3) (4)
+Treatment effect 0.04 0.04 "0:00 "0:02
+ð0:05Þ ð0:05Þ ð0:07Þ ð0:07Þ
+Round dummy No Yes No Yes
+SEs Block Bootstrap Block Bootstrap OLS OLS
+n
+Significance at the 10% level.
+nnSignificance at the 5% level.
+nnnSignificance at the 1% level.
+
+Fig. 4. Average turnout by territory and year for the parliamentary elections. The vertical line indicates the year in which the law changed.
+
+6. Estimating potential bandwagon effects
+In political science, the bandwagon effect refers to the phenomenon in which people might vote for a candidate just
+because he or she is likely to win the election. Bandwagon voting can be of two types: (1) individuals may receive utility
+from voting for the winner such that they disregard their private information or preferences and vote for the candidate who
+feel ex ante and has more support (bandwagon vote switching effect) or (2) individuals receive utility from voting for the
+winner such that they are willing to turnout to vote for their most preferred candidate when he or she is expected to win
+than when he or she is expected to lose (bandwagon turnout effect). In the first type of bandwagon voting, voters choose to
+vote for the winner contrary to their preferences or information and in the second type, voters always choose according to
+their preferences or information if they vote, but are more likely to turnout if their preferred candidate is the expected
+
+winner.34 Although this effect attracted a lot of attention among scholars, it was quite difficult to provide empirical evidence.
+An opposite effect, the “underdog” effect, where voters tend to favor the disadvantaged candidate, has also been discussed
+as a possibility.35
+The French natural experiment, however, provides a unique setting for examining such effects in that prior to the 2005
+reform, voters in the western OST knew the winner when they went to the polls. Our identification strategy thus relies on
+estimating the impact of the leading presidential candidate's vote edge, as compared to that of the runner-up on the
+mainland (and in the eastern OST), on the vote difference in the western OST. To determine this impact, we estimate the
+following equation:
+Δst ¼ αþβΔmainland;t þγ1½t 42005% þδΔmainland;tn1½t 42005% þεst; ð2Þ
+where Δmainland;t A½0; 1% is the normalized difference of votes between the candidate with the most votes and the runner–up
+at time t on the mainland (and in the eastern OST) and Δs;t A½"1; 1% is the same difference in the western departments at
+time t. We use only the vote difference in the western OST as the left-hand variable in this estimation since the non-treated
+departments contribute to Δmainland;t. Our approach minimizes endogeneity concerns because the regressors are predetermined. 1½(% once again denotes the indicator function. Essentially, Eq. (2) estimates a pre- and post-2005 slope, in which
+the parameter of interest, δ, indicates the difference between both coefficients. This approach allows us to test for a
+bandwagon effect using simple t-tests on δ. If such an effect exists, we would expect δ to be significantly different from zero.
+A negative δ would indicate that the results in west OSTs are less correlated with mainland results after the reform (without
+exit poll information) than before the reform (with exit poll information). Thus a negative parameter indicates a bandwagon
+effect, where voters in western OST tended to follow the announced mainland results before the reform. On the contrary, a
+positive δ indicates an underdog effect with western OST voters voting less for the mainland favourite before the reform
+than after.
+Our estimates are summarized in Table 8. We estimate Eq. (2) via OLS and find a pre-treatment slope coefficient of 1.17,
+which is statistically significant different from zero at the 1% level. We also find a large negative slope coefficient of "4:05
+for the post-2005 period. The difference δ between both coefficients is therefore negative ("5:22) and statistically
+significant at the 10% level using ordinary clustered, and bootstrapped standard error estimates (middle of Table 8) in the ttest. Both coefficients, when taken alone, are statistically different from zero, indicating that the positive relation when
+voters know who will win becomes negative after the law changes.
+We also estimate the same equation excluding observations where the vote edge from the mainland was larger than 20
+percentage points (first round of 1988 and second round of 2002). Visual inspection of the raw data suggests that these
+observations could be driving our estimates. Nevertheless, the last column of Table 8 shows that such outlier observations
+are not a problem. The point estimates and standard errors increase somewhat but all estimates are still significant in all
+cases. Fig. 5, which plots the fitted and raw Δtreated;st versus Δmainland;t relation separately before and after 2005, confirms this
+conclusion graphically.
+Overall, these results clearly suggest that election results in western OSTs were more positively correlated with the
+mainland results before the reform when western OST voters could find out the winner in mainland results before voting. In
+practice, the candidate ahead in mainland France was more likely to win in western OSTs before the reform (when voters
+had access to information on the identity of the leader on the mainland) than after the reform (when voters no longer had
+access to such information). As indicated above, there are two possibility explanations for the observed bandwagon voting;
+either the information has a bandwagon vote switching effect or a bandwagon turnout effect or both. Our data does not
+allow us to distinguish between the two possible explanations. Nevertheless, to our knowledge, our results provide the best
+available evidence demonstrating a bandwagon effect.
+7. Concluding remarks
+The advent and proliferation of new electronic information sources and social media has had profound impacts on many
+aspects of politics across the globe. Increasingly, individuals are able to use the web to coordinate protests against
+governments and other groups, acquire secret and classified information, and to monitor exit poll results while an election is
+still in process. In this paper we investigate the possible effects of the last development on political behavior. Previous research using naturally occurring elections has suffered from a number of methodological problems in identifying whether
+such information can have a causal effect on voting behavior.
+We take advantage of a unique natural experiment from 2005, in which French citizens from overseas territories to the
+west of mainland France began for the first time to vote without knowing the choices made by mainland voters. We find
+that knowing the outcome of early voting decreases turnout by about 12 percentage points in our preferred specification.
+We also find empirical support for bandwagon voting in which later voters, if they participate, are more likely to vote for the
+expected winner.
+Our results suggest that when voters can access exit poll results during an election voting behavior is significantly
+affected. These effects on voting behavior (lower participation and a bandwagon effect) provide advantages to candidates
+and political parties favored by early voters, which do not exist in the absence of the information. If later voters differ from
+early voters in terms of demographics and ideological preferences, then we would also expect such information to have an
+effect on the types of public policies chosen by elected officials as well. Candidates and political parties, moreover, have an
+incentive to manipulate the timing of voting and the type and accuracy of information revealed through exit polls. Concerns
+about the effects of exit polls on elections as expressed by many government officials, candidates, and party leaders and calls
+for restrictions on such information are thus strongly supported by our results.
+Furthermore, our results suggest that the increasing use of convenience voting in which individuals cast ballots in
+advance of election day either online, at the mall, or through the mails, may have serious repercussions on voter, candidate, and political party behavior. While many advocate such policies as a way of increasing participation and making elections
+more “friendly” to voters as discussed in Gronke et al. (2007), coupled with information leakages, increasing convenience
+voting can fundamentally change the nature of the election process in unanticipated ways.
+
+
+Table 8
+Estimating Eq. (2) with Δtreated;st as the dependent
+variable. Several standard error estimates are given
+for the t-test of H0: the difference in pre- and post2005 slopes is zero.
+Full
+sample
+Excluding
+outliers
+Pre-2005 slope estimate 1.18nnn 7.45
+ð0:29Þ ð4:71Þ
+Post-2005 slope estimate "4.04n "4:04
+ð2:89Þ ð3:07Þ
+Difference δ "5:22 "11.49
+Standard errors:
+OLS (2.91)n (5.62)nn
+Clustered by department (2.04)n (3.78)nn
+Bootstrapped (1.23)nnn (5.76)nn
+Block bootstrapped by
+department
+(1.73)nnn (3.31)nnn
+N 60 50
+n Significance for this t-test at the 10% level. nn Significance for this t-test at the 5% level. nnn Significance for this t-test at the 1% level.
+
+Fig. 5. Plot of Δmainland versus Δtreated, separately before and after 2005 for the sample without outliers. The former exhibits a clear positive trend and the
+latter a distinct negative trend, indicating that, ceteris paribus, the leading candidate on the mainland loses votes when these voters have no exit poll
+information from the mainland.
