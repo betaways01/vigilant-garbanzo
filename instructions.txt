@@ -1,4 +1,16 @@
-I need help for a paper in Uni for which I have to replicate results from a paper using STATA with a given, slightly modified data set to get to the same results (tables, graphs). It is one graph and the tables (regression tables Difference-in-Difference approach). I would just need a do file with the replication of results, with a short explanation of what was done in which step in the do file in a few words that's pretty much it. The approach is clearly stated in the paper. Here is the paper and the datasets. I would need Figure 2, Table 3 and Table 5 replicated.
+Exit polls, turnout, and bandwagon voting: Evidence
+from a natural experiment
+Rebecca B. Morton a,b
+, Daniel Muller c,n
+, Lionel Page d,e
+, Benno Torgler d,e,f
+a Department of Politics, New York University, NY, Unites States
+b New York University Abu Dhabi, UAE
+c Department of Economics and SFB-884, University of Mannheim, Germany
+d School of Economics and Finance, Queensland University of Technology, Australia
+e QuBE, Australia
+f
+CREMA, Switzerland
 
 
 abstract
